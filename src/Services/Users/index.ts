@@ -1,22 +1,44 @@
-import UserModel from "../../Model/Users";
-import { UserService } from "./index.d";
+import db from "../../Utils/Configs/db";
+import { UserService, PayloadUser, PayloadCreateUser } from "./index.d";
 
 class User implements UserService {
-    // userModel: UserModel;
-    // constructor() {
-    //     this.userModel = UserModel;
-    // }
-
-    public async findAll(): Promise<any> {
-        console.log("GOOD");
-    }
-
-    public async create(name: string): Promise<any> {
+    public async findAll(payload: PayloadUser): Promise<any> {
         try {
-            const Users = await UserModel.create({ name });
-            console.log(Users);
+            const Users = await db.Users.findOne({
+                where: {
+                    username: payload.username,
+                    password: payload.password
+                },
+                attributes: [
+                    'id',
+                    'name',
+                    'username',
+                    'createdAt',
+                    'updatedAt'
+                ]
+            });
+
+            if (!Users) throw "Invalid Username/Password"
+
             return Users;
         } catch (error) {
+            throw error
+        }
+    }
+
+    public async create(payload: PayloadCreateUser): Promise<any> {
+        try {
+            const User = await db.Users.findOne({
+                where: {
+                    username: payload.username,
+                },
+            })
+            if (User) throw "Username Already Exists"
+
+            const Result = await db.Users.create(payload);
+            return Result;
+        } catch (error) {
+            if (error.name) throw error.errors[0].message;
             throw error
         }
     }

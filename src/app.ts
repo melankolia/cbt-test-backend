@@ -1,12 +1,13 @@
 import express, { Application, Request, Response } from "express";
 import Router from "./Routes";
-import sequelize from "./Utils/Configs/db";
+import db from "./Utils/Configs/db";
 import cors from "cors";
 import logger from "morgan";
 import helmet from "helmet";
 import path from "path";
 import dotenv from "dotenv";
 import fs from "fs";
+
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
@@ -32,7 +33,7 @@ app.use(helmet.xssFilter());
 // Init Router
 app.use("/", Router);
 
-sequelize
+db.sequelize
     .sync()
     .then(() => {
         app.listen(process.env.SERVER_PORT || 5000, () =>
@@ -40,5 +41,5 @@ sequelize
         );
 
     })
-    .catch(err => console.log(err))
+    .catch((err: any) => console.log(err))
 
