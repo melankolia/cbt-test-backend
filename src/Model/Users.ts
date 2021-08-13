@@ -1,4 +1,5 @@
 import { Model, UUIDV4 } from "sequelize";
+import User from "../Controller/Users";
 
 interface UserAttributes {
   id: string;
@@ -16,7 +17,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
     password!: string;
 
     static associate(models: any) {
-      // define association here
+      Users.hasOne(models.Ansietas, {
+        foreignKey: 'id_user'
+      })
+      Users.hasOne(models.Depresi, {
+        foreignKey: 'id_user'
+      })
     }
 
   };
