@@ -2,6 +2,20 @@ import db from "../../Utils/Configs/db";
 import { DepresiService, PayloadCreateDepresi } from "./index.d";
 
 class Depresi implements DepresiService {
+    public async findOne(id_user: string): Promise<any> {
+        try {
+            const Depresi = await db.Depresi.findOne({
+                where: {
+                    id_user
+                }
+            })
+            if (!Depresi) throw "Data Not Found";
+
+            return Depresi;
+        } catch (error) {
+            throw error;
+        }
+    }
     public async create(payload: PayloadCreateDepresi): Promise<any> {
         try {
             const Depresi = await db.Depresi.findOne({

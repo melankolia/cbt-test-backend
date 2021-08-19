@@ -23,5 +23,6 @@ export type PayloadCreateDepresi = {
 }
 
 export interface DepresiService {
+    findOne(id_username: string): Promise<any>;
     create(payload: PayloadCreateDepresi): Promise<any>
 }
