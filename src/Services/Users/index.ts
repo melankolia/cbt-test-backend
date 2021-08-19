@@ -2,7 +2,7 @@ import db from "../../Utils/Configs/db";
 import { UserService, PayloadUser, PayloadCreateUser } from "./index.d";
 
 class User implements UserService {
-    public async findAll(payload: PayloadUser): Promise<any> {
+    public async find(payload: PayloadUser): Promise<any> {
         try {
             const Users = await db.Users.findOne({
                 where: {
@@ -39,6 +39,17 @@ class User implements UserService {
             return Result;
         } catch (error) {
             if (error.name) throw error.errors[0].message;
+            throw error
+        }
+    }
+
+    public async findAll(): Promise<any> {
+        try {
+            const Users = await db.Users.findAll()
+            if (!Users) throw "Users Not Found"
+
+            return Users;
+        } catch (error) {
             throw error
         }
     }

@@ -90,3 +90,4 @@
 ::1 - - [13/Aug/2021:17:10:09 +0000] "POST /users HTTP/1.1" 200 188 "http://localhost:8081/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
 ::1 - - [13/Aug/2021:17:10:55 +0000] "OPTIONS /users HTTP/1.1" 204 0 "http://localhost:8081/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
 ::1 - - [13/Aug/2021:17:10:55 +0000] "POST /users HTTP/1.1" 200 188 "http://localhost:8081/" "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
+::1 - - [19/Aug/2021:09:58:04 +0000] "GET /users HTTP/1.1" 200 754 "-" "PostmanRuntime/7.28.2"

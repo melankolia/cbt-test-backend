@@ -24,7 +24,7 @@ class User {
                 username: req.body.username,
                 password: req.body.password
             } as PayloadUser;
-            const Result = await this.userService.findAll(payload)
+            const Result = await this.userService.find(payload)
             Responses.success(res, Result);
         } catch (error) {
             return Responses.failed(res, error, next)
@@ -49,6 +49,15 @@ class User {
             } as PayloadCreateUser;
             const Result = await this.userService.create(payload);
 
+            Responses.success(res, Result);
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+    }
+
+    public async findAll(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            const Result = await this.userService.findAll();
             Responses.success(res, Result);
         } catch (error) {
             return Responses.failed(res, error, next)

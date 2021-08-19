@@ -10,6 +10,7 @@ export type PayloadCreateUser = {
     password: string
 }
 export interface UserService {
-    findAll(payload: PayloadUser): Promise<any>
+    find(payload: PayloadUser): Promise<any>
     create(payload: PayloadCreateUser): Promise<any>
+    findAll(): Promise<any>
 }
