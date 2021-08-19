@@ -7,6 +7,9 @@ class Depresi implements DepresiService {
             const Depresi = await db.Depresi.findOne({
                 where: {
                     id_user
+                },
+                attributes: {
+                    exclude: ["id"]
                 }
             })
             if (!Depresi) throw "Data Not Found";
