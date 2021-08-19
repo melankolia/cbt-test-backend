@@ -48,7 +48,9 @@ class User implements UserService {
             const Users = await db.Users.findAll({
                 attributes: {
                     exclude: ["id", "password"]
-                }
+                },
+                limit: 5,
+                offset: 0
             })
             if (!Users) throw "Users Not Found"
 

@@ -46,19 +46,19 @@ module.exports = (sequelize: any, DataTypes: any) => {
             allowNull: false,
         },
         situasi: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         pikiran: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         distorsi_pikiran: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         perasaan: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         tingkatan_perasaan: {
@@ -66,15 +66,15 @@ module.exports = (sequelize: any, DataTypes: any) => {
             allowNull: true
         },
         perilaku: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         konsekuensi: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         paling_mengganggu: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: true
         }
     }, {
