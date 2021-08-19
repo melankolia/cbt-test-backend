@@ -23,6 +23,7 @@ interface DepresiAttributes {
     q18: number;
     q19: number;
     q20: number;
+    total: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -50,6 +51,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         q18!: number;
         q19!: number;
         q20!: number;
+        total!: number;
 
         static associate(models: any) {
             Depresi.belongsTo(models.Users,
@@ -147,6 +149,10 @@ module.exports = (sequelize: any, DataTypes: any) => {
             allowNull: true
         },
         q20: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        total: {
             type: DataTypes.INTEGER,
             allowNull: true
         },

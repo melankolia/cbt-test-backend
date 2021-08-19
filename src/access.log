@@ -140,3 +140,8 @@
 ::1 - - [19/Aug/2021:11:25:35 +0000] "GET /ansietas HTTP/1.1" 200 28 "-" "PostmanRuntime/7.28.2"
 ::1 - - [19/Aug/2021:11:25:39 +0000] "POST /ansietas HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
 ::1 - - [19/Aug/2021:11:25:42 +0000] "GET /ansietas HTTP/1.1" 200 402 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:11:37:31 +0000] "POST /depresi HTTP/1.1" 400 1118 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:11:37:49 +0000] "POST /depresi HTTP/1.1" 500 1220 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:11:38:45 +0000] "POST /depresi HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:11:38:48 +0000] "POST /depresi HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:11:39:01 +0000] "POST /depresi HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
