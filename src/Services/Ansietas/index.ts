@@ -12,7 +12,25 @@ class Ansietas implements AnsietasService {
                     }
                 ],
             });
-            if (!Ansietas) "Data Not Found"
+            if (!Ansietas) throw "Data Not Found"
+
+            return Ansietas;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async findOne(id_user: string): Promise<any> {
+        try {
+            const Ansietas = await db.Ansietas.findOne({
+                where: {
+                    id_user
+                },
+                attributes: {
+                    exclude: ["id"]
+                }
+            })
+            if (!Ansietas) throw "Data Not Found"
 
             return Ansietas;
         } catch (error) {

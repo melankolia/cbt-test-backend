@@ -19,6 +19,21 @@ class Ansietas {
         }
     }
 
+    public async findOne(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            if (!req.params?.id_user) throw "Id User Required"
+        } catch (error) {
+            return Responses.badRequest(res, error, next);
+        }
+
+        try {
+            const Result = await this.ansietasService.findOne(req.params.id_user as string)
+            Responses.success(res, Result);
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+    }
+
     public async create(req: Request, res: Response, next: NextFunction): Promise<any> {
         try {
             if (!req.body?.id_user) throw "Id User Required"

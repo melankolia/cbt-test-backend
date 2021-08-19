@@ -162,3 +162,6 @@
 ::1 - - [19/Aug/2021:12:07:49 +0000] "GET /depresi/250b76d6-1e9b-4008-bdb7-a18a3215ed7e%22 HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
 ::1 - - [19/Aug/2021:12:08:07 +0000] "GET /depresi/250b76d6-1e9b-4008-bdb7-a18a3215ed7e%22 HTTP/1.1" 500 45 "-" "PostmanRuntime/7.28.2"
 ::1 - - [19/Aug/2021:12:08:11 +0000] "GET /depresi/250b76d6-1e9b-4008-bdb7-a18a3215ed7e HTTP/1.1" 200 362 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:12:20:05 +0000] "GET /ansietas/250b76d6-1e9b-4008-bdb7-a18a3215ed7e HTTP/1.1" 400 53 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:12:20:33 +0000] "GET /ansietas/250b76d6-1e9b-4008-bdb7-a18a3215ed7e HTTP/1.1" 200 274 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:12:22:33 +0000] "GET /ansietas/250b76d6-1e9b-4008-bdb7-a18a3215ed7e HTTP/1.1" 200 230 "-" "PostmanRuntime/7.28.2"

@@ -12,5 +12,6 @@ export type PayloadAnsietas = {
 }
 
 export interface AnsietasService {
+    findOne(id_user: string): Promise<any>
     create(payload: PayloadAnsietas): Promise<any>
 }

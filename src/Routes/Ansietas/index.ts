@@ -5,6 +5,7 @@ const Routers: Router = express.Router();
 const Controller = new AnsietasController();
 
 Routers.get("/", Controller.findAll.bind(Controller));
+Routers.get("/:id_user", Controller.findOne.bind(Controller));
 Routers.post("/", Controller.create.bind(Controller));
 
 
