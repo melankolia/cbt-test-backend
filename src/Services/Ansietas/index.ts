@@ -53,6 +53,7 @@ class Ansietas implements AnsietasService {
 
             return true;
         } catch (error) {
+            if (error.name == "SequelizeForeignKeyConstraintError") throw "Id User Not Found"
             throw error;
         }
     }
