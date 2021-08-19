@@ -45,7 +45,7 @@ class User implements UserService {
 
     public async findAll(): Promise<any> {
         try {
-            const Users = await db.Users.findAll()
+            const Users = await db.Users.findAll({})
             if (!Users) throw "Users Not Found"
 
             return Users;

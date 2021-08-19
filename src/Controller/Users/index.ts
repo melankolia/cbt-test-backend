@@ -42,7 +42,6 @@ class User {
 
         try {
             const payload = {
-                id: uuidv4(),
                 username: req.body.username,
                 name: req.body.name,
                 password: req.body.password
