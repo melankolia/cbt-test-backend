@@ -12,7 +12,6 @@ interface AnsietasAttributes {
   q7: number;
   q8: number;
   q9: number;
-  total: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -29,7 +28,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     q7!: number;
     q8!: number;
     q9!: number;
-    total!: number;
 
     static associate(models: any) {
       Ansietas.belongsTo(models.Users,
@@ -83,10 +81,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       allowNull: true
     },
     q9: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    total: {
       type: DataTypes.INTEGER,
       allowNull: true
     },

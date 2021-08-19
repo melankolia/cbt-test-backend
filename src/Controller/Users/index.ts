@@ -62,6 +62,21 @@ class User {
             return Responses.failed(res, error, next)
         }
     }
+
+    public async findOne(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            if (!req.params?.secureId) throw "SecureId Required"
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+
+        try {
+            const Result = await this.userService.findOne(req.params.secureId as string);
+            Responses.success(res, Result);
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+    }
 }
 
 export default User

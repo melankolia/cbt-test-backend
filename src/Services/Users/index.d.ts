@@ -13,4 +13,5 @@ export interface UserService {
     find(payload: PayloadUser): Promise<any>
     create(payload: PayloadCreateUser): Promise<any>
     findAll(): Promise<any>
+    findOne(secureId: string): Promise<any>
 }

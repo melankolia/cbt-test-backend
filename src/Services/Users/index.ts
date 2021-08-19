@@ -59,6 +59,56 @@ class User implements UserService {
             throw error
         }
     }
+
+    public async findOne(secureId: string): Promise<any> {
+        try {
+            const Users = await db.Users.findOne({
+                where: {
+                    id: secureId
+                },
+                attributes: {
+                    exclude: ["password"]
+                },
+                include: [
+                    {
+                        model: db.Ansietas,
+                        attributes: {
+                            exclude: ['id_user', 'id']
+                        }
+                    },
+                    {
+                        model: db.Depresi,
+                        attributes: {
+                            exclude: ['id_user', 'id']
+                        }
+                    },
+                    {
+                        model: db.CBT_FirstSection,
+                        attributes: {
+                            exclude: ['id_user', 'id']
+                        }
+                    },
+                    {
+                        model: db.CBT_MainSection,
+                        attributes: {
+                            exclude: ['id_user', 'id']
+                        }
+                    },
+                    {
+                        model: db.CBT_PracticeSection,
+                        attributes: {
+                            exclude: ['id_user', 'id']
+                        }
+                    },
+                ]
+            })
+            if (!Users) throw "Users Not Found"
+
+            return Users;
+        } catch (error) {
+            throw error
+        }
+    }
 };
 
 export default User;
