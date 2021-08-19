@@ -8,7 +8,6 @@ interface UserAttributes {
   password: string;
   totalDepresi: number;
   totalAnsietas: number;
-  totalCBT: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -20,7 +19,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
     password!: string;
     totalDepresi!: number;
     totalAnsietas!: number;
-    totalCBT!: number;
 
     static associate(models: any) {
       Users.hasOne(models.Ansietas, {
@@ -56,10 +54,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       allowNull: true
     },
     totalDepresi: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    totalCBT: {
       type: DataTypes.INTEGER,
       allowNull: true
     }
