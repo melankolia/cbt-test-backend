@@ -195,3 +195,6 @@
 ::1 - - [19/Aug/2021:14:37:07 +0000] "POST /cbt/first-section HTTP/1.1" 500 1816 "-" "PostmanRuntime/7.28.2"
 ::1 - - [19/Aug/2021:14:37:27 +0000] "POST /cbt/first-section HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
 ::1 - - [19/Aug/2021:14:37:32 +0000] "POST /cbt/first-section HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:14:46:36 +0000] "POST /cbt/main-section HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:14:46:52 +0000] "POST /cbt/main-section HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
+::1 - - [19/Aug/2021:14:47:02 +0000] "POST /cbt/main-section HTTP/1.1" 200 30 "-" "PostmanRuntime/7.28.2"
