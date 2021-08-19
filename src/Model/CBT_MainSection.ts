@@ -11,7 +11,7 @@ interface CBT_MainSectionAttributes {
     step_16: string;
     step_17: string;
     step_18: string;
-    step_19: number;
+    step_19: string;
     step_20: number;
 
 }
@@ -29,7 +29,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         step_16!: string;
         step_17!: string;
         step_18!: string;
-        step_19!: number;
+        step_19!: string;
         step_20!: number;
 
         static associate(models: any) {
@@ -83,7 +83,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
             allowNull: true
         },
         step_19: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.TEXT,
             allowNull: true
         },
         step_20: {
