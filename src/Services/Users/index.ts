@@ -1,5 +1,6 @@
 import db from "../../Utils/Configs/db";
-import { UserService, PayloadUser, PayloadCreateUser } from "./index.d";
+import { Op } from "sequelize";
+import { UserService, PayloadUser, PayloadFindUsers, PayloadCreateUser } from "./index.d";
 
 class User implements UserService {
     public async find(payload: PayloadUser): Promise<any> {
@@ -43,14 +44,38 @@ class User implements UserService {
         }
     }
 
-    public async findAll(): Promise<any> {
+    public async findAll(payload: PayloadFindUsers): Promise<any> {
         try {
             const Users = await db.Users.findAll({
-                attributes: {
-                    exclude: ["id", "password"]
+                where: {
+                    [Op.or]: [
+                        {
+                            username: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        },
+                        {
+                            name: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        },
+                        {
+                            totalDepresi: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        },
+                        {
+                            totalAnsietas: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        }
+                    ]
                 },
-                limit: 5,
-                offset: 0
+                attributes: {
+                    exclude: ["password"]
+                },
+                limit: 10,
+                offset: payload.page >= 0 ? (payload.page * payload.limit) : 0,
             })
             if (!Users) throw "Users Not Found"
 
@@ -73,31 +98,31 @@ class User implements UserService {
                     {
                         model: db.Ansietas,
                         attributes: {
-                            exclude: ['id_user', 'id']
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
                         }
                     },
                     {
                         model: db.Depresi,
                         attributes: {
-                            exclude: ['id_user', 'id']
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
                         }
                     },
                     {
                         model: db.CBT_FirstSection,
                         attributes: {
-                            exclude: ['id_user', 'id']
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
                         }
                     },
                     {
                         model: db.CBT_MainSection,
                         attributes: {
-                            exclude: ['id_user', 'id']
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
                         }
                     },
                     {
                         model: db.CBT_PracticeSection,
                         attributes: {
-                            exclude: ['id_user', 'id']
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
                         }
                     },
                 ]

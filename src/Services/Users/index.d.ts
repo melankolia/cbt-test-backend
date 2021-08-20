@@ -3,6 +3,12 @@ export type PayloadUser = {
     password: string
 }
 
+export type PayloadFindUsers = {
+    search: string,
+    limit: number,
+    page: number,
+}
+
 export type PayloadCreateUser = {
     id: string,
     name: string,
@@ -12,6 +18,6 @@ export type PayloadCreateUser = {
 export interface UserService {
     find(payload: PayloadUser): Promise<any>
     create(payload: PayloadCreateUser): Promise<any>
-    findAll(): Promise<any>
+    findAll(payload: PayloadFindUsers): Promise<any>
     findOne(secureId: string): Promise<any>
 }

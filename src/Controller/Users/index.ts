@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import UserService from "../../Services/Users";
 import Responses from "../../Utils/Helper/Response";
-import { PayloadUser, PayloadCreateUser } from "../../Services/Users/index.d"
+import { PayloadUser, PayloadCreateUser, PayloadFindUsers } from "../../Services/Users/index.d"
 import { v4 as uuidv4 } from "uuid"
 
 class User {
@@ -56,7 +56,12 @@ class User {
 
     public async findAll(req: Request, res: Response, next: NextFunction): Promise<any> {
         try {
-            const Result = await this.userService.findAll();
+            const payload = {
+                search: req.query?.search || "",
+                limit: req.query?.limit || 10,
+                page: req.query.page ? parseInt(req.query.page as string) - 1 : 0
+            } as PayloadFindUsers
+            const Result = await this.userService.findAll(payload);
             Responses.success(res, Result);
         } catch (error) {
             return Responses.failed(res, error, next)
