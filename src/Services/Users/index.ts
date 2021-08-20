@@ -1,8 +1,9 @@
 import db from "../../Utils/Configs/db";
-import { UserService, PayloadUser, PayloadCreateUser } from "./index.d";
+import { Op } from "sequelize";
+import { UserService, PayloadUser, PayloadFindUsers, PayloadCreateUser } from "./index.d";
 
 class User implements UserService {
-    public async findAll(payload: PayloadUser): Promise<any> {
+    public async find(payload: PayloadUser): Promise<any> {
         try {
             const Users = await db.Users.findOne({
                 where: {
@@ -39,6 +40,97 @@ class User implements UserService {
             return Result;
         } catch (error) {
             if (error.name) throw error.errors[0].message;
+            throw error
+        }
+    }
+
+    public async findAll(payload: PayloadFindUsers): Promise<any> {
+        try {
+            const Users = await db.Users.findAll({
+                where: {
+                    [Op.or]: [
+                        {
+                            username: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        },
+                        {
+                            name: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        },
+                        {
+                            totalDepresi: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        },
+                        {
+                            totalAnsietas: {
+                                [Op.like]: `%${payload.search}%`
+                            }
+                        }
+                    ]
+                },
+                attributes: {
+                    exclude: ["password"]
+                },
+                limit: 10,
+                offset: payload.page >= 0 ? (payload.page * payload.limit) : 0,
+            })
+            if (!Users) throw "Users Not Found"
+
+            return Users;
+        } catch (error) {
+            throw error
+        }
+    }
+
+    public async findOne(secureId: string): Promise<any> {
+        try {
+            const Users = await db.Users.findOne({
+                where: {
+                    id: secureId
+                },
+                attributes: {
+                    exclude: ["password"]
+                },
+                include: [
+                    {
+                        model: db.Ansietas,
+                        attributes: {
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
+                        }
+                    },
+                    {
+                        model: db.Depresi,
+                        attributes: {
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
+                        }
+                    },
+                    {
+                        model: db.CBT_FirstSection,
+                        attributes: {
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
+                        }
+                    },
+                    {
+                        model: db.CBT_MainSection,
+                        attributes: {
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
+                        }
+                    },
+                    {
+                        model: db.CBT_PracticeSection,
+                        attributes: {
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
+                        }
+                    },
+                ]
+            })
+            if (!Users) throw "Users Not Found"
+
+            return Users;
+        } catch (error) {
             throw error
         }
     }

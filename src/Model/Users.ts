@@ -6,6 +6,8 @@ interface UserAttributes {
   name: string;
   username: string;
   password: string;
+  totalDepresi: number;
+  totalAnsietas: number;
 }
 
 module.exports = (sequelize: any, DataTypes: any) => {
@@ -15,12 +17,23 @@ module.exports = (sequelize: any, DataTypes: any) => {
     name!: string;
     username!: string;
     password!: string;
+    totalDepresi!: number;
+    totalAnsietas!: number;
 
     static associate(models: any) {
       Users.hasOne(models.Ansietas, {
         foreignKey: 'id_user'
       })
       Users.hasOne(models.Depresi, {
+        foreignKey: 'id_user'
+      })
+      Users.hasOne(models.CBT_FirstSection, {
+        foreignKey: 'id_user'
+      })
+      Users.hasOne(models.CBT_MainSection, {
+        foreignKey: 'id_user'
+      })
+      Users.hasOne(models.CBT_PracticeSection, {
         foreignKey: 'id_user'
       })
     }
@@ -44,6 +57,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    totalAnsietas: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    totalDepresi: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,

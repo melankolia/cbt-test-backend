@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import UserService from "../../Services/Users";
 import Responses from "../../Utils/Helper/Response";
-import { PayloadUser, PayloadCreateUser } from "../../Services/Users/index.d"
+import { PayloadUser, PayloadCreateUser, PayloadFindUsers } from "../../Services/Users/index.d"
 import { v4 as uuidv4 } from "uuid"
 
 class User {
@@ -24,7 +24,7 @@ class User {
                 username: req.body.username,
                 password: req.body.password
             } as PayloadUser;
-            const Result = await this.userService.findAll(payload)
+            const Result = await this.userService.find(payload)
             Responses.success(res, Result);
         } catch (error) {
             return Responses.failed(res, error, next)
@@ -42,13 +42,41 @@ class User {
 
         try {
             const payload = {
-                id: uuidv4(),
                 username: req.body.username,
                 name: req.body.name,
                 password: req.body.password
             } as PayloadCreateUser;
             const Result = await this.userService.create(payload);
 
+            Responses.success(res, Result);
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+    }
+
+    public async findAll(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            const payload = {
+                search: req.query?.search || "",
+                limit: req.query?.limit || 10,
+                page: req.query.page ? parseInt(req.query.page as string) - 1 : 0
+            } as PayloadFindUsers
+            const Result = await this.userService.findAll(payload);
+            Responses.success(res, Result);
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+    }
+
+    public async findOne(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            if (!req.params?.secureId) throw "SecureId Required"
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+
+        try {
+            const Result = await this.userService.findOne(req.params.secureId as string);
             Responses.success(res, Result);
         } catch (error) {
             return Responses.failed(res, error, next)
