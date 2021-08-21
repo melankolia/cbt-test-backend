@@ -1,27 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 import AnsietasService from "../../Services/Ansietas";
 import Responses from "../../Utils/Helper/Response";
-import { PayloadAnsietas } from "../../Services/Ansietas/index.d";
+import { PayloadCreateAnsietas } from "../../Services/Ansietas/index.d";
 
 class Ansietas {
-    ansietasService: AnsietasService
+    ansietasService: AnsietasService;
 
     constructor() {
         this.ansietasService = new AnsietasService();
     }
 
-    public async findAll(req: Request, res: Response, next: NextFunction): Promise<any> {
-        try {
-            const Result = await this.ansietasService.findAll();
-            Responses.success(res, Result);
-        } catch (error) {
-            return Responses.failed(res, error, next)
-        }
-    }
-
     public async findOne(req: Request, res: Response, next: NextFunction): Promise<any> {
         try {
-            if (!req.params?.id_user) throw "Id User Required"
+            if (!req.params?.id_user) throw "Id User Required";
         } catch (error) {
             return Responses.badRequest(res, error, next);
         }
@@ -53,7 +44,18 @@ class Ansietas {
                 q7: req.body?.q7,
                 q8: req.body?.q8,
                 q9: req.body?.q9,
-            } as PayloadAnsietas
+                q10: req.body?.q10,
+                q11: req.body?.q11,
+                q12: req.body?.q12,
+                q13: req.body?.q13,
+                q14: req.body?.q14,
+                q15: req.body?.q15,
+                q16: req.body?.q16,
+                q17: req.body?.q17,
+                q18: req.body?.q18,
+                q19: req.body?.q19,
+                q20: req.body?.q20,
+            } as PayloadCreateAnsietas
 
             const Result = await this.ansietasService.create(payload);
             Responses.success(res, Result);
@@ -63,4 +65,4 @@ class Ansietas {
     }
 }
 
-export default Ansietas;
+export default Ansietas

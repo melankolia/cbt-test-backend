@@ -1,25 +1,7 @@
 import db from "../../Utils/Configs/db";
-import { AnsietasService, PayloadAnsietas } from "./index.d";
+import { AnsietasService, PayloadCreateAnsietas } from "./index.d";
 
 class Ansietas implements AnsietasService {
-    public async findAll(): Promise<any> {
-        try {
-            const Ansietas = await db.Ansietas.findAll({
-                include: [
-                    {
-                        model: db.Users,
-                        attributes: ["name", "username", "createdAt", "updatedAt"]
-                    }
-                ],
-            });
-            if (!Ansietas) throw "Data Not Found"
-
-            return Ansietas;
-        } catch (error) {
-            throw error;
-        }
-    }
-
     public async findOne(id_user: string): Promise<any> {
         try {
             const Ansietas = await db.Ansietas.findOne({
@@ -30,16 +12,16 @@ class Ansietas implements AnsietasService {
                     exclude: ["id"]
                 }
             })
-            if (!Ansietas) throw "Data Not Found"
+            if (!Ansietas) throw "Data Not Found";
 
             return Ansietas;
         } catch (error) {
             throw error;
         }
     }
-
-    public async create(payload: PayloadAnsietas): Promise<any> {
+    public async create(payload: PayloadCreateAnsietas): Promise<any> {
         try {
+            console.log(payload);
             const Ansietas = await db.Ansietas.findOne({
                 where: {
                     id_user: payload.id_user

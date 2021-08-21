@@ -1,4 +1,4 @@
-export type PayloadAnsietas = {
+export type PayloadCreateAnsietas = {
     id_user: string;
     q1: number;
     q2: number;
@@ -9,9 +9,20 @@ export type PayloadAnsietas = {
     q7: number;
     q8: number;
     q9: number;
+    q10: number;
+    q11: number;
+    q12: number;
+    q13: number;
+    q14: number;
+    q15: number;
+    q16: number;
+    q17: number;
+    q18: number;
+    q19: number;
+    q20: number;
 }
 
 export interface AnsietasService {
-    findOne(id_user: string): Promise<any>
-    create(payload: PayloadAnsietas): Promise<any>
+    findOne(id_username: string): Promise<any>;
+    create(payload: PayloadCreateAnsietas): Promise<any>
 }

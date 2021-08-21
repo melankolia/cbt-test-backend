@@ -3,7 +3,7 @@ module.exports =  {
     username: "root",
     password: "Welcome1!",
     database: "cbt_test",
-    host: "157.245.48.56",
+    host: "localhost",
     dialect: "mysql"
   }
 }

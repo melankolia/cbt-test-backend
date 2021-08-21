@@ -1,18 +1,27 @@
 import { Request, Response, NextFunction } from "express";
 import DepresiService from "../../Services/Depresi";
 import Responses from "../../Utils/Helper/Response";
-import { PayloadCreateDepresi } from "../../Services/Depresi/index.d";
+import { PayloadDepresi } from "../../Services/Depresi/index.d";
 
 class Depresi {
-    depresiService: DepresiService;
+    depresiService: DepresiService
 
     constructor() {
         this.depresiService = new DepresiService();
     }
 
+    public async findAll(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            const Result = await this.depresiService.findAll();
+            Responses.success(res, Result);
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+    }
+
     public async findOne(req: Request, res: Response, next: NextFunction): Promise<any> {
         try {
-            if (!req.params?.id_user) throw "Id User Required";
+            if (!req.params?.id_user) throw "Id User Required"
         } catch (error) {
             return Responses.badRequest(res, error, next);
         }
@@ -44,18 +53,7 @@ class Depresi {
                 q7: req.body?.q7,
                 q8: req.body?.q8,
                 q9: req.body?.q9,
-                q10: req.body?.q10,
-                q11: req.body?.q11,
-                q12: req.body?.q12,
-                q13: req.body?.q13,
-                q14: req.body?.q14,
-                q15: req.body?.q15,
-                q16: req.body?.q16,
-                q17: req.body?.q17,
-                q18: req.body?.q18,
-                q19: req.body?.q19,
-                q20: req.body?.q20,
-            } as PayloadCreateDepresi
+            } as PayloadDepresi
 
             const Result = await this.depresiService.create(payload);
             Responses.success(res, Result);
@@ -65,4 +63,4 @@ class Depresi {
     }
 }
 
-export default Depresi
+export default Depresi;

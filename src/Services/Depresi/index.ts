@@ -1,7 +1,25 @@
 import db from "../../Utils/Configs/db";
-import { DepresiService, PayloadCreateDepresi } from "./index.d";
+import { DepresiService, PayloadDepresi } from "./index.d";
 
 class Depresi implements DepresiService {
+    public async findAll(): Promise<any> {
+        try {
+            const Depresi = await db.Depresi.findAll({
+                include: [
+                    {
+                        model: db.Users,
+                        attributes: ["name", "username", "createdAt", "updatedAt"]
+                    }
+                ],
+            });
+            if (!Depresi) throw "Data Not Found"
+
+            return Depresi;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     public async findOne(id_user: string): Promise<any> {
         try {
             const Depresi = await db.Depresi.findOne({
@@ -12,14 +30,15 @@ class Depresi implements DepresiService {
                     exclude: ["id"]
                 }
             })
-            if (!Depresi) throw "Data Not Found";
+            if (!Depresi) throw "Data Not Found"
 
             return Depresi;
         } catch (error) {
             throw error;
         }
     }
-    public async create(payload: PayloadCreateDepresi): Promise<any> {
+
+    public async create(payload: PayloadDepresi): Promise<any> {
         try {
             const Depresi = await db.Depresi.findOne({
                 where: {
