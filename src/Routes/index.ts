@@ -10,8 +10,8 @@ import CBT_PracticeSection from "./CBT/PracticeSection";
 
 const Routers: Router = express.Router();
 Routers.use("/users", Users);
-Routers.use("/ansietas", Ansietas);
-Routers.use("/depresi", Depresi);
+Routers.use("/ansietas", Depresi);
+Routers.use("/depresi", Ansietas);
 Routers.use("/cbt/first-section", CBT_FirstSection);
 Routers.use("/cbt/main-section", CBT_MainSection);
 Routers.use("/cbt/practice-section", CBT_PracticeSection);
