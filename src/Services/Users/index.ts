@@ -1,6 +1,6 @@
 import db from "../../Utils/Configs/db";
 import { Op } from "sequelize";
-import { UserService, PayloadUser, PayloadFindUsers, PayloadCreateUser } from "./index.d";
+import { UserService, PayloadUser, PayloadFindUsers, PayloadCreateUser, PayloadUpdateStatus } from "./index.d";
 
 class User implements UserService {
     public async find(payload: PayloadUser): Promise<any> {
@@ -14,14 +14,39 @@ class User implements UserService {
                     'id',
                     'name',
                     'username',
+                    'firstLogin',
+                    'status',
                     'createdAt',
-                    'updatedAt'
+                    'updatedAt',
                 ]
             });
 
             if (!Users) throw "Invalid Username/Password"
 
             return Users;
+        } catch (error) {
+            throw error
+        }
+    }
+
+    public async updateStatus(payload: PayloadUpdateStatus): Promise<any> {
+        try {
+            const User = await db.Users.update({
+                status: payload.status,
+                firstLogin: false
+            },
+                {
+                    where: {
+                        id: payload.id
+                    }
+                })
+            const Result = await db.Users.findOne({
+                where: {
+                    id: payload.id,
+                },
+            })
+            if (!Result) throw "User not found";
+            return Result;
         } catch (error) {
             throw error
         }
@@ -134,6 +159,7 @@ class User implements UserService {
             throw error
         }
     }
+
 };
 
 export default User;

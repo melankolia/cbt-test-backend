@@ -15,6 +15,11 @@ export type PayloadCreateUser = {
     username: string,
     password: string
 }
+
+export type PayloadUpdateStatus = {
+    id: string,
+    status: string
+}
 export interface UserService {
     find(payload: PayloadUser): Promise<any>
     create(payload: PayloadCreateUser): Promise<any>
