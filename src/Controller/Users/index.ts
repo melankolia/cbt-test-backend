@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import UserService from "../../Services/Users";
 import Responses from "../../Utils/Helper/Response";
-import { PayloadUser, PayloadCreateUser, PayloadFindUsers } from "../../Services/Users/index.d"
+import { PayloadUser, PayloadCreateUser, PayloadFindUsers, PayloadUpdateStatus } from "../../Services/Users/index.d"
 import { v4 as uuidv4 } from "uuid"
 
 class User {
@@ -72,11 +72,31 @@ class User {
         try {
             if (!req.params?.secureId) throw "SecureId Required"
         } catch (error) {
-            return Responses.failed(res, error, next)
+            return Responses.badRequest(res, error, next)
         }
 
         try {
             const Result = await this.userService.findOne(req.params.secureId as string);
+            Responses.success(res, Result);
+        } catch (error) {
+            return Responses.failed(res, error, next)
+        }
+    }
+
+    public async updateStatus(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            if (!req.body?.id) throw "Id required"
+        } catch (error) {
+            return Responses.badRequest(res, error, next)
+        }
+
+        try {
+            const payload = {
+                id: req.body.id,
+                status: req.body?.status || "Sehat"
+            } as PayloadUpdateStatus
+            const Result = await this.userService.updateStatus(payload);
+
             Responses.success(res, Result);
         } catch (error) {
             return Responses.failed(res, error, next)
