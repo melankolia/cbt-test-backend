@@ -39,6 +39,12 @@ module.exports = (sequelize: any, DataTypes: any) => {
       Users.hasOne(models.CBT_PracticeSection, {
         foreignKey: 'id_user'
       })
+      Users.hasOne(models.Identities, {
+        foreignKey: 'id_user'
+      })
+      Users.hasOne(models.Survey, {
+        foreignKey: 'id_user'
+      })
     }
 
   };
