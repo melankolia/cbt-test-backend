@@ -150,6 +150,18 @@ class User implements UserService {
                             exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
                         }
                     },
+                    {
+                        model: db.Survey,
+                        attributes: {
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt']
+                        }
+                    },
+                    {
+                        model: db.Identities,
+                        attributes: {
+                            exclude: ['id_user', 'id', 'createdAt', 'updatedAt', 'UserId']
+                        }
+                    },
                 ]
             })
             if (!Users) throw "Users Not Found"
