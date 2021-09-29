@@ -21,7 +21,6 @@ class Ansietas implements AnsietasService {
     }
     public async create(payload: PayloadCreateAnsietas): Promise<any> {
         try {
-            console.log(payload);
             const Ansietas = await db.Ansietas.findOne({
                 where: {
                     id_user: payload.id_user
