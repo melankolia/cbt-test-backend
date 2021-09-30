@@ -26,8 +26,9 @@ class Surveys implements SurveyService {
                     id_user: payload.id_user
                 }
             });
+
             if (Surveys) {
-                await db.Surveys.update(
+                await db.Survey.update(
                     payload,
                     { where: { id_user: payload.id_user } })
             } else await db.Survey.create(payload)
