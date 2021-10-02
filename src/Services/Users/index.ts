@@ -71,7 +71,7 @@ class User implements UserService {
 
     public async findAll(payload: PayloadFindUsers): Promise<any> {
         try {
-            const Users = await db.Users.findAll({
+            const Users = await db.Users.findAndCountAll({
                 where: {
                     [Op.or]: [
                         {
